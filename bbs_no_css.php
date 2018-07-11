@@ -18,9 +18,13 @@
     $dbh->query('SET NAMES utf8');
 
 
-    $sql = 'INSERT INTO `posts`(`nickname`,`comment`) VALUES ("'.$nickname.'","'.$comment.'")';
+    $sql = 'INSERT INTO `posts`(`nickname`,`comment`,`created`) VALUES (?,?,?)';
+    $data [] =$nickname;
+    $data [] =$comment;
+    $data [] =date("Y-m-d H:i:s");
+
     $stmt = $dbh->prepare($sql);
-    $stmt->execute();
+    $stmt->execute($data);
 
     $dbh = null;
   };
