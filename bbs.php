@@ -12,12 +12,12 @@ date_default_timezone_set('Asia/Manila');
     $nickname = htmlspecialchars($_POST['nickname']);
     $comment = htmlspecialchars($_POST['comment']);
 
-    // if (empty($nickname)){
-    //   return;
-    // };
-    // if (empty($comment)){
-    //   return;
-    // };
+    if (empty($nickname)){
+      return;
+    };
+    if (empty($comment)){
+      return;
+    };
 
 
     $sql = 'INSERT INTO `posts`(`nickname`,`comment`,`created`) VALUES (?,?,?)';
@@ -46,7 +46,7 @@ date_default_timezone_set('Asia/Manila');
       $comments[] =$rec;//⇦配列に追加
 
     }
-    
+
   $dbh = null;
 
   ?>
@@ -129,8 +129,14 @@ date_default_timezone_set('Asia/Manila');
                       <i class="fa fa-cogs"></i>
                   </div>
                   <div class="timeline-label">
-                      
-                      <h2><a href="#"><?php echo $comment['nickname'] ?></a> <span><?php echo $comment['created'] ?></span></h2>
+                     <h2>
+                        <a href="#"><?php echo $comment['nickname'] ?></a> <span><?php echo $comment['created'] ?></span>
+                        
+                        <a href="edit.php?id=<?php echo $comment["id"];?>"  class="btn btn-success" style ="color: white">編集</a>
+
+                        <a href="delete.php?id=<?php echo $comment["id"];?>"  class="btn btn-danger" style ="color: white">削除</a>
+
+                      </h2>
                       <p><?php echo $comment['comment'] ?></p>
                   </div>
               </div>
